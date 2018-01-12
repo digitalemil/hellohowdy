@@ -1,0 +1,8 @@
+{
+"marathon-lb": {
+"principal": "mlb-principal",
+"secret_name": "marathon-lb/mlb-key",
+"user": "nobody",
+"marathon-uri": "https://marathon.mesos:8443"
+}
+}

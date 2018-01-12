@@ -1,0 +1,6 @@
+{
+  "service": {
+    "service_account": "kafka-principal",
+    "service_account_secret": "kafka/kafka-key"
+  }
+}

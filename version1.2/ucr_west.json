@@ -1,0 +1,87 @@
+{
+	"volumes": [],
+	"id": "/west/ucr-howdy",
+	"cmd": null,
+	"args": null,
+	"user": null,
+	"env": {
+		"SECRET":{  
+			"secret":"secret0"
+		 },
+		 "FILEBASEDSECRET":"west-secret.json"
+	  },
+	"secrets":{  
+		"secret0":{  
+			"source":"west/cattlemen-secret"
+	  },
+		"secret1": {
+			"source": "west/west-filebasedsecret"
+		  }
+	 },
+"instances": 2,
+	"cpus": 0.1,
+	"mem": 128,
+	"disk": 0,
+	"gpus": 0,
+	"executor": "",
+	"constraints": [],
+	"fetch": [],
+	"storeUrls": [],
+	"backoffSeconds": 1,
+	"backoffFactor": 1.15,
+	"maxLaunchDelaySeconds": 3600,
+	"container": {
+		"type": "MESOS",
+		"volumes": [
+			{
+			  "containerPath": "west-secret.json",
+			  "secret": "secret1"
+			}
+		  ],
+		"docker": {
+			"image": "digitalemil/mypublicrepo:node-howdy-v1.2",
+			"portMappings": null,
+			"privileged": false,
+			"parameters": [],
+			"forcePullImage": true
+		}
+	},
+	"healthChecks": [
+    {
+      "protocol": "HTTP",
+      "path": "/",
+      "gracePeriodSeconds": 2,
+      "intervalSeconds": 5,
+      "timeoutSeconds": 2,
+      "maxConsecutiveFailures": 4,
+      "portIndex": 0,
+      "ignoreHttp1xx": false
+    }
+  ],
+"readinessChecks": [],
+	"dependencies": [],
+	"upgradeStrategy": {
+		"minimumHealthCapacity": 1,
+		"maximumOverCapacity": 1
+	},
+	"labels": {
+		"DCOS_SERVICE_SCHEME":"http",
+		"DCOS_SERVICE_NAME":"howdy",
+		"DCOS_SERVICE_PORT_INDEX":"0",
+		"HAPROXY_GROUP": "external",
+		"HAPROXY_0_VHOST": "howdy.com"
+	},
+	"acceptedResourceRoles": null,
+	"ipAddress": null,
+	"residency": null,
+	"taskKillGracePeriodSeconds": null,
+	"portDefinitions": [{
+		"port": 10011,
+		"protocol": "tcp",
+		"name": "myp",
+		"labels": {
+			"VIP_0": "/westhowdy:80"
+		}
+	}],
+	"requirePorts": false
+}

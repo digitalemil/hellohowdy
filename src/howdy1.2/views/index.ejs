@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    Listening on Port: <%= port %><p>
+    <%if (secret != undefined) { %>
+    Secret: <div id="secret"></div><p>
+       <% } %>
+    <p></p>
+    <%if (filebasedsecret != undefined) { %>
+        Filebased Secret: <div id="filebasedsecret"></div><p>
+    <% } %>    
+  </body>
+<script>
+  function setSecret() {
+  //  console.log(decodeURIComponent("<%= secret %>"));
+    <%if (secret != undefined) { %>
+    document.getElementById("secret").innerHTML= decodeURIComponent("<%= secret %>");
+    <% } %>
+    <%if (filebasedsecret != undefined) { %>
+    document.getElementById("filebasedsecret").innerHTML= decodeURIComponent("<%= filebasedsecret %>");
+    <% } %>    
+  };
+  setSecret();
+</script>
+
+</html>
